@@ -21,8 +21,9 @@ phases:
       - echo Pushing the Docker image...
       - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/brain-tasks-app:latest
       - echo Updating Kubeconfig for EKS...
+      # THIS LINE LOGS CODEBUILD INTO YOUR CLUSTER
       - aws eks update-kubeconfig --name brain-tasks-cluster --region $AWS_DEFAULT_REGION
       - echo Deploying to EKS Cluster...
+      # THIS LINE UPDATES YOUR APP
       - kubectl apply -f deployment.yaml
-      - kubectl apply -f service.yaml
       - echo Build and Deployment Completed!
